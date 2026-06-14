@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/iwap}
+    username: ${SPRING_DATASOURCE_USERNAME:iwap}
+    password: ${SPRING_DATASOURCE_PASSWORD:iwap}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  ldap:
+    enabled: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+jwt:
+  secret: ${JWT_SECRET:dev_secret_please_change_in_production_min_64_chars_xxxxxxxxxxx}
+  expiration-ms: ${JWT_EXPIRATION_MS:3600000}
+
+guacd:
+  host: ${GUACD_HOST:localhost}
+  port: ${GUACD_PORT:4822}
+
+recording:
+  path: ${RECORDING_PATH:/recordings}
+
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  bucket: ${MINIO_BUCKET:recordings}
+
+docker:
+  host: ${DOCKER_HOST:unix:///var/run/docker.sock}
+  browser-image: ${BROWSER_IMAGE:kasmweb/chromium:1.14.0}
+  browser-network: ${BROWSER_NETWORK:iwap_browser-network}
+
+auth:
+  ldap:
+    enabled: ${LDAP_ENABLED:false}
+    url: ${LDAP_URL:ldap://localhost:389}
+    base-dn: ${LDAP_BASE_DN:dc=company,dc=local}
+    user-search-filter: ${LDAP_USER_SEARCH_FILTER:(sAMAccountName={0})}
+    manager-dn: ${LDAP_MANAGER_DN:}
+    manager-password: ${LDAP_MANAGER_PASSWORD:}
+
+logging:
+  level:
+    com.iwap: INFO
+    org.springframework.security: WARN

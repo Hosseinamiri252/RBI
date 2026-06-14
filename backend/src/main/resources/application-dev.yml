@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/iwap
+    username: iwap
+    password: iwap
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    com.iwap: DEBUG
